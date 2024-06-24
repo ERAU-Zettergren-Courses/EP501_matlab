@@ -1,35 +1,8 @@
-% A simple script to solve a system of equations, while checking various
-% aspects of the matrix representation of that system
-%
-%This script requires files containing the functions Gauss_elim, backsub, and Jacobi.  
+%%Problem #2
+%%Create a new version of your simple forward elimination function which will work for multiple right-hand sides (RHS)
+%%which will be a lower triangular matrix
 
-%adding line to practice git merge-alec sblendorio
-
-%% Illustrate the number of operations needed to implement Cramer's rule
-n=1:10;
-nops=(n-1).*factorial(n+1)+n;      %see book for discussion
-figure(1);
-loglog(n,nops,'o','LineWidth',2,'MarkerSize',20,'MarkerFaceColor','blue');
-xlabel('size of system (# of unknowns)');
-ylabel('number of multiply/divides needed to solve');
-title('Theoretical Computational Cost of Cramer''s Rule')
-
-
-%% Define the example problem discussed in class
-% Example solved by hand in class
-%   x1 + 4*x2 + 2*x3  = 15
-% 3*x1 + 2*x2 +   x3 = 10
-% 2*x1 +   x2 + 3*x3 = 13
-A=[1, 4, 2; ...
-   3, 2, 1; ...
-   2, 1, 3];
-b=[15;10;13];
-x=A\b;
-disp('(class problem Matlab solution) x = ');
-disp(x);
-
-
-%% Illustrate vanilla forward elimination
+function [Awork] = fwdElimrhs(A,b)
 nref=length(b);                %system size for reference problem
 
 %note that the elimination procedure coded below modifies the matrix B
@@ -41,13 +14,12 @@ for ir1=2:nref                                           %loop over rows from 2 
     end %for
 end %for
 
-disp('elim([Aref,bref]) = ');
-disp(Awork);
-
-
+%disp('elim([Aref,bref]) = ');
+%disp(Awork);
 %% Illustrate back substitution on B using provided Matlab function
 xsoln=backsub(Awork);
 disp('Elimination/back sub solution:  ');
 disp(xsoln);
 disp('Matlab,GNU/Octave built-in solution:  ');
 disp(A\b);
+end %function 

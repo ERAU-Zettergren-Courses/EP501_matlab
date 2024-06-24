@@ -1,4 +1,4 @@
-function [Amod,ord]=Gauss_elim(A,b,verbose)
+function [Amod,ord]=determinant(A,b,verbose)
 
 % [Amod,ord]=Gauss_elim(A,b,verbose)
 %
@@ -81,9 +81,9 @@ end %for
 %first need to re-order the matrix 
 Areorder = Amod(ord,:);
 %once re-ordered, compute the backsubstitution 
-xback = backsub(Areorder);
-disp('Back Substitution of matrix:');
-disp(xback);
+% xback = backsub(Areorder);
+% disp('Back Substitution of matrix:');
+% disp(xback);
 %to compute determinant need to take the product of the diagonals of the
 %reordered matrix
 determinant1 = prod(diag(Areorder));
